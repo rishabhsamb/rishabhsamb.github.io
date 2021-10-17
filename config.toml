@@ -36,7 +36,7 @@ publishdir = "docs"
   pre = ""
   weight = -90
   identifier = "resume"
-  url = ""
+  url = "./files/rishabhsambareresume.pdf"
 [[menu.footer]]
   name = "LinkedIn"
   pre = ""
