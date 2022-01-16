@@ -23,6 +23,7 @@ publishdir = "docs"
     subtitle = "sick of tea? that's like being sick of breathing."
     showFooter = false
     showPoweredBy = false
+    googleAnalyticsID = "G-3VQHNGCWXX"
     # listPaginatorLimit = 1000000
 
 [[menu.footer]]
