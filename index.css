@@ -1,0 +1,109 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 90%;
+    color: var(--body-text);
+    text-rendering: optimizeLegibility;
+    display: block;
+    flex-direction: column;
+    background-color: var(--bg);
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    margin: 50px auto;
+    max-width: 750px;
+    width: 100%;
+}
+
+.header {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    color: var(--header-text);
+}
+
+.header h1 {
+    font-size: 30px;
+    font-weight: normal
+}
+
+.header a {
+    text-decoration: none;
+    color: var(--link-body);
+}
+
+.navbar {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    text-decoration: none;
+}
+
+.navbar a:visited {
+    color: var(--body-text);
+}
+
+.navbar a:hover {
+    color: var(--navbar-link-hover)
+}
+
+.footer {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+.footer a {
+    text-decoration: none;  
+}
+
+.footer svg {
+    fill: var(--body-text);
+}
+
+.footer a:hover {
+    color: var(--navbar-link-hover)
+}
+
+.footer svg:hover {
+    fill: var(--navbar-link-hover)
+}
+
+@media (prefers-color-scheme: light) {
+    html,
+    :root {
+      --white: white;
+      --grey-600: #707070;
+      --bg-alt: #FFFFFF;
+      --bg: #F2F3F5;
+      --black: #000000;
+      --body-text: #141823;
+      --header-text: var(--black);
+      --link-body: #1772d0;
+      --navbar-link-hover: #1772d0;
+    } 
+}
+@media (prefers-color-scheme: dark) {
+    html,
+    :root {
+        --white: white;
+        --bg-alt: #212020;
+        --bg: #201f1f;
+        --black: black;
+        --body-text: #e5e5e5;
+        --header-text: var(--white);
+        --link-body: #028fe7;
+        --navbar-link-hover: #028fe7;
+    } 
+}
