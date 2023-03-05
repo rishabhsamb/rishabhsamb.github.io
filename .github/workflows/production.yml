@@ -26,10 +26,10 @@ jobs:
       - name: Build Website
       - run: npm run build
       - name: Upload Build
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: './build'
+        - uses: actions/upload-pages-artifact@v1
+        - with:
+            - path: './build'
       - name: Deploy to Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+        - id: deployment
+        - uses: actions/deploy-pages@v1
 
