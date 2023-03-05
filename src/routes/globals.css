@@ -1,0 +1,37 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 90%;
+    color: var(--body-text);
+    text-rendering: optimizeLegibility;
+    display: block;
+    flex-direction: column;
+    background-color: var(--bg);
+}
+
+@media (prefers-color-scheme: light) {
+    html,
+    :root {
+      --white: white;
+      --grey-600: #707070;
+      --bg-alt: #FFFFFF;
+      --bg: #F2F3F5;
+      --black: #000000;
+      --body-text: #141823;
+      --header-text: var(--black);
+      --link-body: #1772d0;
+      --navbar-link-hover: #1772d0;
+    } 
+}
+@media (prefers-color-scheme: dark) {
+    html,
+    :root {
+        --white: white;
+        --bg-alt: #212020;
+        --bg: #201f1f;
+        --black: black;
+        --body-text: #e5e5e5;
+        --header-text: var(--white);
+        --link-body: #028fe7;
+        --navbar-link-hover: #028fe7;
+    } 
+}

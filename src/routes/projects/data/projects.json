@@ -1,0 +1,38 @@
+[
+    {
+        "id": 0,
+        "title": "wave-chat",
+        "description": "a video chat platform made for freshman during COVID-19",
+        "link": "https://github.com/rishabhsamb/wave-chat"
+    },
+    {
+        "id": 1,
+        "title": "climbing-regressor",
+        "description": "a random forest model that predicts climbing performance",
+        "link": "https://github.com/rishabhsamb/climbing-inference"
+    },
+    {
+        "id": 2,
+        "title": "md-html-sync",
+        "description": "a Rust process that continuously compiles a Markdown file into HTML during development",
+        "link": "https://github.com/rishabhsamb/md-html-sync"
+    },
+    {
+        "id": 3,
+        "title": "fss-bot",
+        "description": "a Discord bot written in Go that provides weather data and can respond to user-defined prompts",
+        "link": "https://github.com/rishabhsamb/fss-bot"
+    },
+    {
+        "id": 4,
+        "title": "deranged-murakami",
+        "description": "a (failed) attempt at trying to reproduce reasonable text from Murakami books",
+        "link": "https://github.com/rishabhsamb/deranged-murakami"
+    },
+    {
+        "id": 5,
+        "title": "torch-gans",
+        "description": "the vanilla GAN and conditional GAN, both implemented in PyTorch and trained over MNIST",
+        "link": "https://github.com/rishabhsamb/torch-gans"
+    }
+]
