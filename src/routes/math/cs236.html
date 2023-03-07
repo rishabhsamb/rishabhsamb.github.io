@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans">
+    <link rel="stylesheet" href="../style.css">
+    <meta 
+        name="description"
+        content="Rishabh's note repository."
+    >
+    <script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="../index.html">
+                about
+            </a>
+            <a href="../math.html">
+                math
+            </a>
+            <a href="../projects.html">
+                projects
+            </a>
+        </div>
+        <p>this course is primarily concerned with learning parametric approximations of data distributions (the course assumes that all learnable data is indeed coming from a distribution).</p>
+        <p>Inference in the context of generative models means to learn a joint distribution over the data. Inference queries on generative models that we care about include:</p>
+        <ol type="1">
+        <li><p>Density estimation: given a datapoint <span class="math inline">\(x\)</span>, what is the probability <span class="math inline">\(p_{\theta}(x)\)</span> assigned by the model (i.e. probability it came from the data distribution)?</p></li>
+        <li><p>Sampling: How can we generate novel data from the model distribution such that the new data is distributed similarly to the underlying data distribution.</p></li>
+        <li><p>Unsupervised representation learning: How can we learn meaningful feature representations for a datapoint <span class="math inline">\(x\)</span>. This allows us to understand more about the underlying distribution (this one feels vague).</p></li>
+        </ol>
+        <h2 id="autoregressive-models">Autoregressive models</h2>
+        <p>Assume access to a dataset <span class="math inline">\(D\)</span> of <span class="math inline">\(n\)</span>-dimensional datapoints <span class="math inline">\(x\)</span>. For simplicity assume <span class="math inline">\(x \in \{0,1\}^n\)</span> .</p>
+        <h3 id="representation">Representation</h3>
+        <p>By the chain rule of probability (<span class="math inline">\(P(A \cap B) = P(B|A)\cdot P(A)\)</span>), we have that</p>
+        <p><span class="math display">\[ p(x) = \Pi_{i=1}^n p(x_1 | x_1, x_2 \dots x_{i-1}) \]</span></p>
+        <p>The dependence of <span class="math inline">\(x_j\)</span> on all the <span class="math inline">\(x_i\)</span> for <span class="math inline">\(i &lt; j\)</span> can be visualized as a ‘Bayesian network’. Since we make no conditional independence assumptions (no <span class="math inline">\(x_i\)</span> is known to be independent from some <span class="math inline">\(x_j\)</span> for <span class="math inline">\(j &lt; i\)</span>), the Bayesian network is considered ‘autoregressive’. We can then say that the <em>distribution for the <span class="math inline">\(i\)</span>-th random variable depends on the <span class="math inline">\(i\)</span> variables before it</em>, for some fixed ordering of the <span class="math inline">\(n\)</span> variables.</p>
+        <p>This framework allows to fully represent any possible distribution over <span class="math inline">\(n\)</span> variables, but the space required to specify all such probabilities would be <span class="math inline">\(\Theta(2^n)\)</span>.</p>
+        <p>So one approach is to approximate the conditional <span class="math inline">\(p(x_i|x_{&lt;i})\)</span> using a Bernoulli random variable who’s mean is a function parametrized by the <span class="math inline">\(i-1\)</span> previous variables. This ends up looking like</p>
+        <p><span class="math display">\[ p_{\theta_i}(x_i|x_{&lt;i}) = \text{Bern}(f_i(x_1,x_2 \cdots ,x_{i-1})) \]</span></p>
+        <p>Each approximate conditional <span class="math inline">\(p_{\theta_i}\)</span> is specified by the set of parameters <span class="math inline">\(\theta_i\)</span> its function <span class="math inline">\(f_i\)</span> has. The problem has thus been reduced to this set of <span class="math inline">\(i\)</span> functions <span class="math inline">\(\{f_i | 1 \leq i \leq n\}\)</span>. An MLP approach with 1 hidden layer takes <span class="math inline">\(\Theta(n^2d)\)</span> space since there is an <span class="math inline">\(\mathbb{R}^{d \times (i-1)}\)</span> matrix for each <span class="math inline">\(i\)</span> from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span> (ends up simplifying to <span class="math inline">\(d(n+1)(n)/2\)</span>).</p>
+        <h3 id="neural-autoregressive-density-estimator-nade">Neural Autoregressive Density Estimator (NADE)</h3>
+        <p><a href="http://proceedings.mlr.press/v15/larochelle11a/larochelle11a.pdf">NADE</a> attempts to reduce this space complexity by sharing a single weight matrix for each conditional. The parameters for each of the <span class="math inline">\(n\)</span> MLPs are shared, and they each use successively larger parts of the matrix for their calculations <span class="math inline">\(f_i\)</span> uses <span class="math inline">\(W[..i] \in \mathbb{R}^{d \times (i-1)}\)</span> where <span class="math inline">\(W[..i]\)</span> is the leftmost submatrix with d rows and <span class="math inline">\(i-1\)</span> columns (this makes sense don’t pretend it doesn’t). This reduces the space complexity to <span class="math inline">\(\Theta(dn + dn + n)\)</span> (<span class="math inline">\(W \in \Theta(dn)\)</span>, the final layer activations for each MLP is a vector in <span class="math inline">\(\mathbb{R}^d\)</span>, and there are <span class="math inline">\(n\)</span> of them, and there are <span class="math inline">\(n\)</span> biases for each final layer as well).</p>
+        <p>To extend NADE to real-valued functions, <a href="https://arxiv.org/abs/1306.0186">RNADE</a> attempts to use a mixture of <span class="math inline">\(K\)</span> Gaussians. Instead of learning a mean function for a Bernoulli, we learn <span class="math inline">\(K\)</span> means and <span class="math inline">\(K\)</span> variances for each of the <span class="math inline">\(K\)</span> Gaussian distributions for each <span class="math inline">\(i \in [1,n]\)</span>. To make this efficient, they have <span class="math inline">\(i\)</span> learnable functions <span class="math inline">\(g_i:\mathbb{R}^{i-1} \rightarrow \mathbb{R^{2K}}\)</span> output <span class="math inline">\(K\)</span> (mean,variance) pairs for the Gaussians approximating the <span class="math inline">\(i\)</span>-th conditional.</p>
+        <p>Since NADE fixes orderings of the Bayesian network, you can use an ensemble of NADE models with different orderings to get (better?) results. See <a href="https://arxiv.org/abs/1310.1757">EoNADE</a>.</p>
+    </div>
+</body>
+</html>
