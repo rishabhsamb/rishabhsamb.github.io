@@ -12,6 +12,10 @@
         I previously spent time interning at <a href="https://tribalscale.com">TribalScale</a> developing serverless APIs with TypeScript and AWS for several projects. 
         Before that, I had a fantastic time interning on the <a href="https://distributedgenomics.ca">CanDIG team</a> at <a href="https://uhn.ca">UHN</a>, where I prototyped a federated learning system over their
         decentralized infrastructure for genomic data.
+        <br>
+        <br>
+        I look forward to hearing from different engineers in the industry and I find myself consistently interested in learning about different engineering challenges solved
+        at companies of all sizes. Please reach out <a href="mailto:rsambare@uwaterloo.ca">here</a> or see my <a href="rishabhsambareresume.pdf">resume</a> here, I'd love to hear from you!
     </p>
     <Footer/>
 </div>
