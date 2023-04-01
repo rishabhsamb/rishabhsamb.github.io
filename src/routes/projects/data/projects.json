@@ -34,5 +34,11 @@
         "title": "torch-gans",
         "description": "the vanilla GAN and conditional GAN, both implemented in PyTorch and trained over MNIST",
         "link": "https://github.com/rishabhsamb/torch-gans"
+    },
+    {
+        "id": 6,
+        "title": "tiny-redis",
+        "description": "a RAM only key-value store created using C++ and the POSIX API",
+        "link": "https://github.com/rishabhsamb/tiny-redis"
     }
 ]
