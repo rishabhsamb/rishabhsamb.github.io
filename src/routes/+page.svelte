@@ -15,7 +15,7 @@
         <br>
         <br>
         I look forward to hearing from different engineers in the industry and I find myself consistently interested in learning about different engineering challenges solved
-        at companies of all sizes. Please reach out <a href="mailto:rsambare@uwaterloo.ca">here</a> or see my <a href="rishabhsambareresume.pdf">resume</a> here, I'd love to hear from you!
+        at companies of all sizes. Please reach out <a href="mailto:rsambare@uwaterloo.ca">here</a> or see my <a href="Rishabh_Sambare_resume.pdf">resume</a> here, I'd love to hear from you!
     </p>
     <Footer/>
 </div>
